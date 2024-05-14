@@ -475,6 +475,7 @@ def make_pod(
 
     unsorted_env = {}
     for key, env in (env or {}).items():
+        print("before conversion", env)
         # Normalize KubeSpawners env input to valid Kubernetes EnvVar Python
         # representations. They should have a "name" field as well as either a
         # "value" field or "value_from" field. For examples see the
@@ -489,6 +490,7 @@ def make_pod(
         # Extract information about references to other envs as we want to use
         # those to make an intelligent sorting before we render this into a list
         # with an order that matters.
+        print("after conversion", env)
         unsorted_env[env.name] = {
             "deps": _get_env_var_deps(env),
             "key": key,
